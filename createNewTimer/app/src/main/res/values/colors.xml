@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="green_bg">#fff000</color>
+    <color name="back_color">#212121</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="toolbar_color">#262627</color>
+
+    <color name="hotel_banner_color">#262628</color>
+    <color name="hotel_name_txt_color">#909090</color>
+    <color name="hotel_intro_txt_color">#27A9DB</color>
+    <color name="hotel_txt_color">#C8C7C9</color>
+
+
+
+
+
+    <color name="primary">@color/toolbar_color</color>
+    <color name="primary_dark">@color/toolbar_color</color>
+    <color name="status_bar_color">@color/primary_dark</color>
+
+
+</resources>
