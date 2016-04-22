@@ -2,7 +2,6 @@ package com.newtimer.app;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +28,6 @@ public class PickerLinear extends LinearLayout {
     MyPickerAdapter myPickerAdapter;
     TextView dateTxt;
     Context mContext;
-    View frist;  //起始时间
-    View last;  //结束时间
     private int month;
     private GetDateStrInterface myInterface;
 
@@ -64,23 +61,32 @@ public class PickerLinear extends LinearLayout {
     }
 
     private void init() {
+
         dateList = new ArrayList<>();
         calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
+
+        if (month > 12) {
+            year += month / 12;
+            month = month - 12;
+        }
+
         int day = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month - 1);
-        calendar.set(Calendar.DATE, 1);
-        calendar.roll(Calendar.DATE, -1);
+//        calendar.set(Calendar.DATE, 1);
+//        calendar.roll(Calendar.DATE, -1);
+
+
         int maxDate = calendar.get(Calendar.DATE);
         int taday = calendar.get(Calendar.DAY_OF_WEEK);
         //如果不是每月第一天,则追加空白天数
-        if (taday != 7) {
-            for (int i = 0; i < taday; i++) {
+        if (taday != 1) {
+            for (int i = 0; i < taday - 1; i++) {
                 dateList.add(" , ");
             }
         }
-        for (int i = 1; i <= maxDate; i++) {
+        for (int i = 1; i <= day; i++) {
             dateList.add(year + "-" + month + "-" + i + "," + i);
         }
         myPickerAdapter = new MyPickerAdapter(mContext);

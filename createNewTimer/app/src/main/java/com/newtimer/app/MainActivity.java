@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements PickerLinear.GetD
         pickerLinears = new ArrayList<>();
         calendar = Calendar.getInstance();
         int month = calendar.get(Calendar.MONTH) + 1;
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 12; i++) {
             pickerLinear = new PickerLinear(this, month + i);
             pickerLinear.setInterface(this);
             pickerLinears.add(pickerLinear);
