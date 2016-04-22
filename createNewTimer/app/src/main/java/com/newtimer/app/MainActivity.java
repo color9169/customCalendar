@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements PickerLinear.GetD
         pickerLinears = new ArrayList<>();
         calendar = Calendar.getInstance();
         int month = calendar.get(Calendar.MONTH) + 1;
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 6; i++) {
             pickerLinear = new PickerLinear(this, month + i);
             pickerLinear.setInterface(this);
             pickerLinears.add(pickerLinear);
@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements PickerLinear.GetD
 
     @Override
     public void getPreTime(String preStr) {
-        Toast.makeText(this, preStr, Toast.LENGTH_SHORT).show();
         String date = preStr.split(",")[0];
         String[] dateArr = date.split("-");
         tx1.setText("入住时间\n" + dateArr[0] + "年" + dateArr[1] + "月" + dateArr[2] + "日");
@@ -104,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements PickerLinear.GetD
 
     @Override
     public void getNextTime(String nextStr) {
-        Toast.makeText(this, nextStr, Toast.LENGTH_SHORT).show();
         String date = nextStr.split(",")[0];
         String[] dateArr = date.split("-");
         tx2.setText("离店时间\n" + dateArr[0] + "年" + dateArr[1] + "月" + dateArr[2] + "日");

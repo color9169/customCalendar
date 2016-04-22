@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,17 +60,25 @@ public class MyPickerAdapter extends BaseAdapter {
         String[] strArr = dateList.get(i).toString().split(",");
         Calendar calendar = Calendar.getInstance();
         int month = calendar.get(Calendar.MONTH) + 1;
-        if (strArr[0].equals(" ")) {
+        if (strArr[0].equals(" ") || strArr[0].equals("")) {
             vh.tx.setText(strArr[0]);
         } else {
-            int now_month = Integer.parseInt(strArr[0].split("-")[1]);
+            String currentStr = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.DAY_OF_MONTH);
+            Date currentDate = getDate(currentStr);
+            Date date = getDate(strArr[0]);
+            String s = strArr[0].split("-")[1];
+            int now_month = Integer.parseInt(s);
             int day = Integer.parseInt(strArr[1].trim());
-            if ((i + 1) % 7 == 1) {  //计算为周日时显示的颜色
-                vh.tx.setTextColor(mContext.getResources().getColor(R.color.hotel_intro_txt_color));
-            } else if ((i + 1) % 7 == 0) {//计算为周六时显示的颜色
-                vh.tx.setTextColor(mContext.getResources().getColor(R.color.hotel_intro_txt_color));
-            } else {
+            if (date.getTime() < currentDate.getTime()) {
                 vh.tx.setTextColor(mContext.getResources().getColor(R.color.hotel_name_txt_color));
+            } else {
+                if ((i + 1) % 7 == 1) {  //计算为周日时显示的颜色
+                    vh.tx.setTextColor(mContext.getResources().getColor(R.color.hotel_intro_txt_color));
+                } else if ((i + 1) % 7 == 0) {//计算为周六时显示的颜色
+                    vh.tx.setTextColor(mContext.getResources().getColor(R.color.hotel_intro_txt_color));
+                } else {
+                    vh.tx.setTextColor(mContext.getResources().getColor(R.color.white));
+                }
             }
             StringBuffer dateValue = new StringBuffer();
             dateValue.append(strArr[1]);
@@ -83,5 +94,16 @@ public class MyPickerAdapter extends BaseAdapter {
 
     class ViewHolder {
         TextView tx;
+    }
+
+    public Date getDate(String currentStr) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = null;
+        try {
+            currentDate = format.parse(currentStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return currentDate;
     }
 }

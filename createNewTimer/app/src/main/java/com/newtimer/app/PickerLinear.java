@@ -67,18 +67,20 @@ public class PickerLinear extends LinearLayout {
         int year = calendar.get(Calendar.YEAR);
 
         if (month > 12) {
-            year += month / 12;
-            month = month - 12;
+            int someYear = month / 12;
+            year += someYear;
+            month = month - 12 * someYear;
+            if (month == 0) {
+                month = 12;
+                year -= 1;
+            }
         }
 
         int day = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month - 1);
-//        calendar.set(Calendar.DATE, 1);
-//        calendar.roll(Calendar.DATE, -1);
 
 
-        int maxDate = calendar.get(Calendar.DATE);
         int taday = calendar.get(Calendar.DAY_OF_WEEK);
         //如果不是每月第一天,则追加空白天数
         if (taday != 1) {
